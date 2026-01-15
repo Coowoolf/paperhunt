@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-    title: "ConvoBench | AI Agent Evaluation Platform",
-    description: "专业的对话式 AI Agent 评测平台",
+    title: "ConvoBench | Voice Agent Paper Hunt",
+    description: "Curated collection of papers on Conversational AI, Voice Agents, Speech LLMs, and Real-time Voice Interaction",
 };
 
 export default function RootLayout({
