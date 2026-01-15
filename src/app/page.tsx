@@ -442,13 +442,13 @@ export default function Home() {
                         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                             <Image
                                 src="/logo.jpg"
-                                alt="ConvoBench Logo"
+                                alt="PaperHunt Logo"
                                 width={48}
                                 height={48}
                                 style={{ borderRadius: 12 }}
                             />
                             <div>
-                                <h1 style={{ fontSize: 20, fontWeight: 700 }} className="gradient-text">ConvoBench</h1>
+                                <h1 style={{ fontSize: 20, fontWeight: 700 }} className="gradient-text">PaperHunt</h1>
                                 <p style={{ fontSize: 12, color: 'var(--text-tertiary)', marginTop: -2 }}>Voice Agent Paper Hunt</p>
                             </div>
                         </div>
@@ -456,7 +456,7 @@ export default function Home() {
                             <button onClick={toggleTheme} className="btn btn-icon">
                                 {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
                             </button>
-                            <a href="https://github.com/Coowoolf/convobench" target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
+                            <a href="https://github.com/Coowoolf/paperhunt" target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
                                 <Github className="w-4 h-4" />
                                 <span>GitHub</span>
                             </a>
@@ -631,9 +631,9 @@ export default function Home() {
             {/* Footer */}
             <footer style={{ borderTop: '1px solid var(--border)', position: 'relative', zIndex: 1 }}>
                 <div style={{ maxWidth: 1200, margin: '0 auto', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <p style={{ fontSize: 13, color: 'var(--text-tertiary)' }}>© 2026 ConvoBench</p>
+                    <p style={{ fontSize: 13, color: 'var(--text-tertiary)' }}>© 2026 PaperHunt</p>
                     <p style={{ fontSize: 13, color: 'var(--text-tertiary)' }}>
-                        Missing a paper? <a href="https://github.com/Coowoolf/convobench/issues" target="_blank" rel="noopener noreferrer" className="gradient-text" style={{ fontWeight: 600 }}>Submit a PR</a>
+                        Missing a paper? <a href="https://github.com/Coowoolf/paperhunt/issues" target="_blank" rel="noopener noreferrer" className="gradient-text" style={{ fontWeight: 600 }}>Submit a PR</a>
                     </p>
                 </div>
             </footer>

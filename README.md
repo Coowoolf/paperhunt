@@ -1,12 +1,12 @@
-# ConvoBench
+# PaperHunt
 
 <p align="center">
-  <img src="public/logo.jpg" alt="ConvoBench Logo" width="200" />
+  <img src="public/logo.jpg" alt="PaperHunt Logo" width="200" />
 </p>
 
 **Voice Agent Paper Hunt** - Curated collection of academic papers on Conversational AI, Voice Agents, Speech LLMs, and Real-time Voice Interaction.
 
-🔗 **Live Site:** [convobench.org](https://convobench.org)
+🔗 **Live Site:** [paperhunt.org](https://paperhunt.org)
 
 ## ✨ Features
 
@@ -52,7 +52,7 @@
 
 ## 🎨 Design
 
-ConvoBench features **Dopamine Geek Style**:
+PaperHunt features **Dopamine Geek Style**:
 
 - Cream background with floating gradient decorations
 - Premium cards with glow effects on hover
@@ -66,14 +66,14 @@ ConvoBench features **Dopamine Geek Style**:
 - **Styling**: Custom CSS with CSS Variables
 - **Icons**: Lucide React
 - **Deployment**: Vercel
-- **Domain**: convobench.org
+- **Domain**: paperhunt.org
 
 ## 🚀 Getting Started
 
 ```bash
 # Clone the repository
-git clone https://github.com/Coowoolf/convobench.git
-cd convobench
+git clone https://github.com/Coowoolf/paperhunt.git
+cd paperhunt
 
 # Install dependencies
 npm install
@@ -118,4 +118,4 @@ MIT License
 
 Built with ❤️ for the Voice Agent community.
 
-© 2026 ConvoBench
+© 2026 PaperHunt

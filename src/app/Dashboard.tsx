@@ -31,7 +31,7 @@ export function Dashboard() {
             {/* Header */}
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-3xl font-bold gradient-text">ConvoBench</h1>
+                    <h1 className="text-3xl font-bold gradient-text">PaperHunt</h1>
                     <p className="text-[var(--muted)] mt-1">声网对话式 AI 引擎评测平台</p>
                 </div>
                 <button className="btn-primary flex items-center gap-2">

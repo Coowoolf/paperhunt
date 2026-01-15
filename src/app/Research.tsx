@@ -251,7 +251,7 @@ export function Research() {
                     发现了相关的 Conversational AI 论文？欢迎通过 GitHub 提交 PR！
                 </p>
                 <a
-                    href="https://github.com/Coowoolf/convobench"
+                    href="https://github.com/Coowoolf/paperhunt"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-primary inline-flex items-center gap-2"
