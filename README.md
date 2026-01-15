@@ -4,49 +4,61 @@
 
 🔗 **Live Site:** [convobench.org](https://convobench.org)
 
-![ConvoBench Screenshot](https://via.placeholder.com/800x400/0a0a0f/5B9FFF?text=ConvoBench)
-
 ## ✨ Features
 
-- 📚 **20+ Curated Papers** - Landmark research from OpenAI, Google, Meta, and academia
+- 📚 **25+ Curated Papers** - Landmark research from OpenAI, Google, Meta, Kyutai, Alibaba, and academia
+- 💡 **Insights Module** - Key industry metrics and trends at a glance
 - 🔍 **Smart Search** - Filter by title, author, abstract, or keywords
-- 🏷️ **Tag-based Filtering** - Quick filter by benchmark, LLM, voice-agent, real-time, etc.
+- 🏷️ **Tag-based Filtering** - Quick filter by benchmark, LLM, voice-agent, full-duplex, etc.
 - 📊 **Citation Sorting** - Sort papers by citations or publication year
-- 🌗 **Dual Theme** - Dark mode (default) and Light mode (Dopamine Geek Style)
-- ⭐ **Landmark Badges** - Highlighted influential papers (Whisper, GPT-4o, Google Duplex)
+- 🌗 **Dual Theme** - Light (Dopamine Geek Style) and Dark mode
+- ⭐ **Landmark Badges** - Highlighted influential papers
+
+## 💡 Insights
+
+| Metric | Value | Description |
+|--------|-------|-------------|
+| **Latency Target** | < 200ms | Industry benchmark for human-like voice interaction |
+| **Research History** | 50+ Years | From ELIZA (1966) to GPT-4o (2024) |
+| **Next Frontier** | Full-Duplex | Simultaneous listening & speaking (Moshi, GPT-4o) |
+| **Architecture Shift** | Speech-Native | End-to-end models replacing cascaded ASR→LLM→TTS |
 
 ## 📖 Featured Papers
 
 ### Landmark Papers
-- **Whisper** - Robust Speech Recognition via Large-Scale Weak Supervision (OpenAI, 2100+ citations)
-- **Google Duplex** - AI System for Real-World Phone Tasks (Google, 1250+ citations)
-- **GPT-4o** - Omni-Modal Foundation Model with 232ms audio latency (OpenAI)
+- **Attention Is All You Need** (2017) - Foundation of Transformer architecture (95K+ citations)
+- **Whisper** (2023) - Robust multilingual ASR from OpenAI (2.1K+ citations)
+- **Google Duplex** (2018) - Human-level phone conversations (1.2K+ citations)
+- **GPT-4o** (2024) - 232ms audio latency, native multimodality
+- **Moshi** (2024) - Open-source full-duplex speech model from Kyutai
+
+### Speech-Native Models
+- **GLM-4-Voice** - End-to-end Chinese voice model (Zhipu AI)
+- **Qwen2-Audio** - General audio perception beyond speech (Alibaba)
+- **SALMONN** - Generic hearing abilities for LLMs
+- **AudioPaLM** - Speech-to-speech with PaLM-2 (Google)
+- **LLaMA-Omni** - Low-latency speech interaction
 
 ### Benchmarks
-- **SUPERB** - Speech Processing Universal PERformance Benchmark
-- **VocalBench** - Benchmarking Vocal Conversational Abilities
-- **DialogBench** - Evaluating LLMs as Human-like Dialogue Systems
-- **MT-Bench** - Multi-Turn Benchmark for LLM Conversation
-- **VoiceAgentEval** - Evaluating LLMs for Expert-Level Outbound Calling
-
-### Speech Language Models
-- **Moshi** - Full-Duplex Speech-to-Speech Model (Kyutai Labs)
-- **LLaMA-Omni** - Seamless Speech Interaction with LLMs
-- **SeamlessM4T** - Multilingual & Multimodal Translation (Meta)
+- **SUPERB** - Speech processing universal benchmark
+- **VocalBench** - Vocal conversational abilities
+- **DialogBench** - Human-like dialogue evaluation
+- **MT-Bench** - Multi-turn conversation benchmark
+- **Chatbot Arena** - Human preference evaluation
 
 ## 🎨 Design
 
-ConvoBench features a **Dopamine Geek Style** visual system:
+ConvoBench features **Dopamine Geek Style**:
 
-- **Light Mode**: Cream background (#F5F3EF), Claymorphism cards, soft shadows
-- **Dark Mode**: Deep dark background (#0a0a0f), Glass-morphism cards
-- **Dopamine Gradients**: Blue → Purple → Pink → Orange color palette
-- **Floating Decorations**: Animated gradient spheres
+- Cream background with floating gradient decorations
+- Premium cards with glow effects on hover
+- Gradient stat cards (Blue → Purple → Pink → Orange)
+- Outfit typography for modern, readable text
 
 ## 🛠️ Tech Stack
 
 - **Framework**: Next.js 16 (App Router)
-- **Styling**: CSS Variables + Custom Components
+- **Styling**: Custom CSS with CSS Variables
 - **Icons**: Lucide React
 - **Deployment**: Vercel
 - **Domain**: convobench.org
@@ -56,8 +68,6 @@ ConvoBench features a **Dopamine Geek Style** visual system:
 ```bash
 # Clone the repository
 git clone https://github.com/Coowoolf/convobench.git
-
-# Navigate to project
 cd convobench
 
 # Install dependencies
@@ -72,7 +82,7 @@ npm run build
 
 ## 🤝 Contributing
 
-Missing a paper? Want to add a new benchmark?
+Missing a paper? Want to add new research?
 
 1. Fork the repository
 2. Add your paper to the `papers` array in `src/app/page.tsx`
@@ -87,29 +97,20 @@ Missing a paper? Want to add a new benchmark?
   authors: "Author Names",
   venue: "Conference/Journal",
   year: 2024,
-  arxivId: "2401.00000",  // or use `link` for non-arXiv papers
+  arxivId: "2401.00000",  // or use `link` for non-arXiv
   tags: ["benchmark", "voice-agent", "LLM"],
-  abstract: "Brief description of the paper...",
+  abstract: "Brief description...",
   citations: 100,
-  highlight: false  // Set to true for landmark papers
+  highlight: false  // true for landmark papers
 }
 ```
 
-## 📋 Roadmap
-
-- [ ] Paper submission form
-- [ ] User authentication
-- [ ] Paper upvoting system
-- [ ] RSS feed for new papers
-- [ ] Email notifications
-- [ ] Citation graph visualization
-
 ## 📄 License
 
-MIT License - feel free to use this project for your own purposes.
+MIT License
 
 ---
 
 Built with ❤️ for the Voice Agent community.
 
-© 2024 ConvoBench
+© 2026 ConvoBench

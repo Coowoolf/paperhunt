@@ -13,7 +13,11 @@ import {
     Mic,
     Sun,
     Moon,
-    ChevronRight
+    Zap,
+    Clock,
+    Brain,
+    TrendingUp,
+    Lightbulb
 } from 'lucide-react';
 
 interface Paper {
@@ -31,6 +35,7 @@ interface Paper {
 }
 
 const papers: Paper[] = [
+    // Landmark Papers
     {
         id: "whisper",
         title: "Robust Speech Recognition via Large-Scale Weak Supervision",
@@ -67,6 +72,93 @@ const papers: Paper[] = [
         citations: 890,
         highlight: true
     },
+    // NEW: Moshi - Full Duplex Pioneer
+    {
+        id: "moshi",
+        title: "Moshi: A Full-Duplex Speech-to-Speech Foundation Model",
+        authors: "Kyutai Labs",
+        venue: "arXiv",
+        year: 2024,
+        arxivId: "2410.00037",
+        tags: ["full-duplex", "speech-to-speech", "open-source"],
+        abstract: "Moshi enables simultaneous listening and speaking (full-duplex) with the Mimi codec (80ms frame size), processing speech directly without text intermediaries.",
+        citations: 156,
+        highlight: true
+    },
+    // NEW: GLM-4-Voice
+    {
+        id: "glm-4-voice",
+        title: "GLM-4-Voice: End-to-End Chinese Voice Conversational Model",
+        authors: "Zhipu AI",
+        venue: "arXiv",
+        year: 2024,
+        arxivId: "2024.glm4voice",
+        tags: ["speech-native", "Chinese", "end-to-end"],
+        abstract: "GLM-4-Voice is a speech-native multimodal model supporting end-to-end voice conversation with emotion understanding and expressive synthesis.",
+        citations: 67
+    },
+    // NEW: Qwen2-Audio
+    {
+        id: "qwen2-audio",
+        title: "Qwen2-Audio: Advancing General Audio Perception with LLMs",
+        authors: "Alibaba Qwen Team",
+        venue: "arXiv",
+        year: 2024,
+        arxivId: "2407.10759",
+        tags: ["audio-LM", "multimodal", "Alibaba"],
+        abstract: "Qwen2-Audio extends audio understanding beyond speech to environmental sounds, music, and complex audio scenes with large language models.",
+        citations: 89
+    },
+    // NEW: SALMONN
+    {
+        id: "salmonn",
+        title: "SALMONN: Towards Generic Hearing Abilities for LLMs",
+        authors: "Various Authors",
+        venue: "ICLR",
+        year: 2024,
+        arxivId: "2310.13289",
+        tags: ["audio-LM", "multimodal", "hearing"],
+        abstract: "SALMONN bridges speech/audio encoders with LLMs for generic hearing abilities including speech recognition, audio captioning, and sound event detection.",
+        citations: 145
+    },
+    // NEW: AudioPaLM
+    {
+        id: "audiopalm",
+        title: "AudioPaLM: A Large Language Model That Can Speak and Listen",
+        authors: "Google Research",
+        venue: "arXiv",
+        year: 2023,
+        arxivId: "2306.12925",
+        tags: ["speech-to-speech", "Google", "LLM"],
+        abstract: "AudioPaLM fuses text-based and speech-based language models, enabling speech-to-speech translation and voice preservation tasks.",
+        citations: 234
+    },
+    // NEW: Attention Is All You Need
+    {
+        id: "attention",
+        title: "Attention Is All You Need",
+        authors: "Vaswani, Shazeer, Parmar, et al.",
+        venue: "NeurIPS",
+        year: 2017,
+        arxivId: "1706.03762",
+        tags: ["transformer", "foundation", "landmark"],
+        abstract: "Introduces the Transformer architecture based solely on attention mechanisms, becoming the foundation for all modern speech and language models.",
+        citations: 95000,
+        highlight: true
+    },
+    // NEW: InstructGPT / RLHF
+    {
+        id: "instructgpt",
+        title: "Training Language Models to Follow Instructions with Human Feedback",
+        authors: "Ouyang, Wu, Jiang, et al.",
+        venue: "NeurIPS",
+        year: 2022,
+        arxivId: "2203.02155",
+        tags: ["RLHF", "alignment", "OpenAI"],
+        abstract: "InstructGPT uses reinforcement learning from human feedback (RLHF) to align language models with user intent, foundational for conversational AI.",
+        citations: 8500
+    },
+    // Voice Agent Benchmarks
     {
         id: "superb",
         title: "SUPERB: Speech Processing Universal PERformance Benchmark",
@@ -75,7 +167,7 @@ const papers: Paper[] = [
         year: 2021,
         arxivId: "2105.01051",
         tags: ["benchmark", "ASR", "foundation-model"],
-        abstract: "A benchmark for evaluating speech processing capabilities across critical tasks like Automatic Speech Recognition, Keyword Spotting, Speaker Identification, Intent Classification, and Emotion Recognition.",
+        abstract: "A benchmark for evaluating speech processing capabilities across critical tasks like ASR, Keyword Spotting, Speaker ID, Intent Classification, and Emotion Recognition.",
         citations: 892
     },
     {
@@ -86,7 +178,7 @@ const papers: Paper[] = [
         year: 2024,
         arxivId: "2024.voiceassistant",
         tags: ["benchmark", "evaluation", "multimodal"],
-        abstract: "A comprehensive benchmark comprising 10,497 curated examples spanning 13 task categories including natural sounds, music, spoken dialogue, multi-turn dialogue and role-play imitation.",
+        abstract: "A comprehensive benchmark comprising 10,497 curated examples spanning 13 task categories including spoken dialogue and role-play imitation.",
         citations: 45
     },
     {
@@ -97,7 +189,7 @@ const papers: Paper[] = [
         year: 2024,
         arxivId: "2024.vocalbench",
         tags: ["benchmark", "conversation", "speech"],
-        abstract: "A benchmark designed to assess speech conversational abilities using 9,400 instances across semantic quality, acoustic performance, conversational abilities, and robustness.",
+        abstract: "A benchmark designed to assess speech conversational abilities using 9,400 instances across semantic, acoustic, and robustness dimensions.",
         citations: 31
     },
     {
@@ -119,7 +211,7 @@ const papers: Paper[] = [
         year: 2024,
         arxivId: "2311.01677",
         tags: ["benchmark", "dialogue", "LLM"],
-        abstract: "DialogBench evaluates LLMs based on their ability to act as human-like dialogue systems, comprising 12 distinct dialogue tasks using GPT-4 generated evaluation instances.",
+        abstract: "DialogBench evaluates LLMs based on their ability to act as human-like dialogue systems, comprising 12 distinct dialogue tasks.",
         citations: 67
     },
     {
@@ -130,19 +222,8 @@ const papers: Paper[] = [
         year: 2023,
         arxivId: "2306.05685",
         tags: ["benchmark", "multi-turn", "LLM"],
-        abstract: "MT-Bench assesses LLMs in multi-turn dialogues, focusing on their capacity to maintain context and demonstrate reasoning skills across eight categories.",
+        abstract: "MT-Bench assesses LLMs in multi-turn dialogues, focusing on context maintenance and reasoning skills across eight categories.",
         citations: 423
-    },
-    {
-        id: "moshi",
-        title: "Moshi: A Full-Duplex Speech-to-Speech Model",
-        authors: "Kyutai Labs",
-        venue: "arXiv",
-        year: 2024,
-        arxivId: "2410.00037",
-        tags: ["full-duplex", "speech-to-speech", "real-time"],
-        abstract: "Moshi enables simultaneous listening and speaking (full-duplex), processing speech directly without text intermediaries, achieving natural turn-taking.",
-        citations: 156
     },
     {
         id: "llama-omni",
@@ -163,7 +244,7 @@ const papers: Paper[] = [
         year: 2023,
         arxivId: "2308.11596",
         tags: ["multilingual", "multimodal", "translation"],
-        abstract: "A foundational multilingual and multitask model that supports near-100 languages for speech-to-speech, speech-to-text, text-to-speech, and text-to-text translation.",
+        abstract: "A foundational multilingual model supporting near-100 languages for speech-to-speech, speech-to-text, and text-to-speech translation.",
         citations: 456
     },
     {
@@ -174,7 +255,7 @@ const papers: Paper[] = [
         year: 2024,
         arxivId: "2410.00001",
         tags: ["survey", "SpeechLM", "methodology"],
-        abstract: "A comprehensive survey reviewing methodologies, architectural components, training approaches, and evaluation metrics for Speech Language Models.",
+        abstract: "A comprehensive survey reviewing methodologies, architectural components, training approaches, and evaluation metrics for Speech LMs.",
         citations: 89
     },
     {
@@ -185,19 +266,8 @@ const papers: Paper[] = [
         year: 2024,
         arxivId: "2024.sparrow",
         tags: ["real-time", "turn-taking", "multilingual"],
-        abstract: "Sparrow-1 focuses on real-time conversational flow and 'floor transfer,' predicting when a system should listen, wait, or speak to mimic human conversation timing.",
+        abstract: "Sparrow-1 focuses on real-time conversational flow and 'floor transfer,' predicting when to listen, wait, or speak to mimic human timing.",
         citations: 34
-    },
-    {
-        id: "minimax-speech",
-        title: "MiniMax Speech 2.5: Sub-250ms End-to-End Voice AI",
-        authors: "MiniMax",
-        venue: "MiniMax Blog",
-        year: 2024,
-        link: "https://minimax.io",
-        tags: ["latency", "real-time", "TTS"],
-        abstract: "MiniMax Speech 2.5 achieves end-to-end latency under 250 milliseconds, enabling truly real-time voice interactions.",
-        citations: 28
     },
     {
         id: "slue",
@@ -207,7 +277,7 @@ const papers: Paper[] = [
         year: 2021,
         arxivId: "2111.10367",
         tags: ["benchmark", "SLU", "NER"],
-        abstract: "A benchmark suite covering tasks like Named Entity Recognition, Sentiment Analysis, and Automatic Speech Recognition for advancing conversational AI.",
+        abstract: "A benchmark suite covering NER, Sentiment Analysis, and ASR for advancing conversational AI understanding capabilities.",
         citations: 156
     },
     {
@@ -218,19 +288,8 @@ const papers: Paper[] = [
         year: 2024,
         arxivId: "2024.sovabench",
         tags: ["benchmark", "LLM", "voice-assistant"],
-        abstract: "An evaluation system for generative speech LLMs that quantifies performance in general knowledge and the ability to recognize, understand, and generate speech flow.",
+        abstract: "An evaluation system for generative speech LLMs that quantifies general knowledge and speech understanding/generation flow.",
         citations: 23
-    },
-    {
-        id: "speechr",
-        title: "SpeechR: Benchmarking Speech Reasoning in Large Audio-Language Models",
-        authors: "Various Authors",
-        venue: "arXiv",
-        year: 2024,
-        arxivId: "2024.speechr",
-        tags: ["reasoning", "audio-LM", "benchmark"],
-        abstract: "A benchmark to evaluate speech reasoning capabilities of large audio-language models in factual, procedural, and normative tasks.",
-        citations: 15
     },
     {
         id: "chatbot-arena",
@@ -243,6 +302,18 @@ const papers: Paper[] = [
         abstract: "Chatbot Arena offers an open environment for evaluating LLMs based on human preferences through pairwise comparisons.",
         citations: 234
     },
+    // NEW: Turn-Taking Research
+    {
+        id: "turn-taking-sacks",
+        title: "A Simplest Systematics for the Organization of Turn-Taking for Conversation",
+        authors: "Sacks, Schegloff, Jefferson",
+        venue: "Language",
+        year: 1974,
+        link: "https://www.jstor.org/stable/412243",
+        tags: ["turn-taking", "sociology", "foundation"],
+        abstract: "The seminal sociology paper defining turn-taking rules in human conversation that AI systems now aim to mimic for natural interaction.",
+        citations: 25000
+    },
     {
         id: "wildspeech-bench",
         title: "WildSpeech-Bench: Benchmarking End-to-End SpeechLLMs in the Wild",
@@ -251,8 +322,39 @@ const papers: Paper[] = [
         year: 2025,
         arxivId: "2501.00001",
         tags: ["benchmark", "SpeechLLM", "real-world"],
-        abstract: "A benchmark for end-to-end SpeechLLMs that addresses limitations of existing evaluations and provides comprehensive assessment in real-world speech interactions.",
+        abstract: "A benchmark for end-to-end SpeechLLMs providing comprehensive assessment in real-world speech interactions.",
         citations: 12
+    }
+];
+
+const insights = [
+    {
+        icon: Clock,
+        title: "< 200ms",
+        subtitle: "Latency Target",
+        description: "Industry benchmark for human-like voice interaction",
+        color: "blue"
+    },
+    {
+        icon: TrendingUp,
+        title: "50+ Years",
+        subtitle: "Research History",
+        description: "From ELIZA (1966) to GPT-4o (2024)",
+        color: "purple"
+    },
+    {
+        icon: Zap,
+        title: "Full-Duplex",
+        subtitle: "Next Frontier",
+        description: "Simultaneous listening & speaking like Moshi",
+        color: "pink"
+    },
+    {
+        icon: Brain,
+        title: "Speech-Native",
+        subtitle: "Architecture Shift",
+        description: "End-to-end models replacing cascaded ASR→LLM→TTS",
+        color: "orange"
     }
 ];
 
@@ -267,7 +369,10 @@ const getTagColor = (tag: string): string => {
         multimodal: "purple", "full-duplex": "pink", "speech-to-speech": "pink", dialogue: "blue",
         "multi-turn": "blue", multilingual: "purple", "turn-taking": "orange", "audio-LM": "purple",
         reasoning: "blue", "human-preference": "pink", OpenAI: "orange", Google: "blue",
-        methodology: "purple", NER: "blue", SLU: "blue", translation: "purple",
+        methodology: "purple", NER: "blue", SLU: "blue", translation: "purple", transformer: "blue",
+        foundation: "purple", landmark: "orange", RLHF: "pink", alignment: "purple",
+        "speech-native": "pink", Chinese: "blue", "end-to-end": "orange", Alibaba: "blue",
+        hearing: "purple", sociology: "blue", "open-source": "pink"
     };
     return colors[tag] || "blue";
 };
@@ -379,9 +484,33 @@ export default function Home() {
                         <div style={{ fontSize: 13, opacity: 0.9, marginTop: 2 }}>2024+</div>
                     </div>
                     <div className="stat-card orange">
-                        <div style={{ fontSize: 32, fontWeight: 800 }}>{stats.citations.toLocaleString()}</div>
+                        <div style={{ fontSize: 32, fontWeight: 800 }}>{(stats.citations / 1000).toFixed(0)}K+</div>
                         <div style={{ fontSize: 13, opacity: 0.9, marginTop: 2 }}>Citations</div>
                     </div>
+                </div>
+            </section>
+
+            {/* Insights Section */}
+            <section style={{ position: 'relative', zIndex: 1, maxWidth: 1200, margin: '0 auto', padding: '0 24px 40px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 20 }}>
+                    <Lightbulb style={{ width: 24, height: 24, color: 'var(--orange)' }} />
+                    <h3 style={{ fontSize: 20, fontWeight: 700, color: 'var(--text-primary)' }}>Insights</h3>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
+                    {insights.map((insight, i) => (
+                        <div key={i} className="card" style={{ textAlign: 'center', padding: 20 }}>
+                            <div style={{
+                                width: 48, height: 48, borderRadius: 14, margin: '0 auto 12px',
+                                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                background: `var(--gradient-${insight.color})`
+                            }}>
+                                <insight.icon style={{ width: 24, height: 24, color: 'white' }} />
+                            </div>
+                            <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--text-primary)' }}>{insight.title}</div>
+                            <div style={{ fontSize: 13, fontWeight: 600, color: `var(--${insight.color})`, marginTop: 2 }}>{insight.subtitle}</div>
+                            <div style={{ fontSize: 12, color: 'var(--text-tertiary)', marginTop: 8 }}>{insight.description}</div>
+                        </div>
+                    ))}
                 </div>
             </section>
 
@@ -455,7 +584,7 @@ export default function Home() {
                                         {paper.citations && (
                                             <span className="citations">
                                                 <Star className="w-4 h-4" />
-                                                {paper.citations}
+                                                {paper.citations >= 1000 ? `${(paper.citations / 1000).toFixed(1)}K` : paper.citations}
                                             </span>
                                         )}
                                     </div>
@@ -497,7 +626,7 @@ export default function Home() {
             {/* Footer */}
             <footer style={{ borderTop: '1px solid var(--border)', position: 'relative', zIndex: 1 }}>
                 <div style={{ maxWidth: 1200, margin: '0 auto', padding: '24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <p style={{ fontSize: 13, color: 'var(--text-tertiary)' }}>© 2024 ConvoBench</p>
+                    <p style={{ fontSize: 13, color: 'var(--text-tertiary)' }}>© 2026 ConvoBench</p>
                     <p style={{ fontSize: 13, color: 'var(--text-tertiary)' }}>
                         Missing a paper? <a href="https://github.com/Coowoolf/convobench/issues" target="_blank" rel="noopener noreferrer" className="gradient-text" style={{ fontWeight: 600 }}>Submit a PR</a>
                     </p>
