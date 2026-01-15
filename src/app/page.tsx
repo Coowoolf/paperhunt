@@ -2,18 +2,18 @@
 
 import { useState, useMemo } from 'react';
 import {
-    ExternalLink,
+    Search,
+    ArrowUpRight,
     BookOpen,
     Calendar,
     Users,
-    Tag,
-    Search,
-    Filter,
-    TrendingUp,
-    Mic,
-    Github,
     Star,
-    ArrowUpRight
+    Sparkles,
+    Github,
+    Mic,
+    TrendingUp,
+    Award,
+    Zap
 } from 'lucide-react';
 
 interface Paper {
@@ -27,21 +27,48 @@ interface Paper {
     tags: string[];
     abstract: string;
     citations?: number;
+    highlight?: boolean;
 }
 
 const papers: Paper[] = [
-    // Voice Agent Benchmarks
+    // Landmark Papers
     {
-        id: "voiceassistant-eval",
-        title: "VoiceAssistant-Eval: A Comprehensive Benchmark for AI Assistants",
-        authors: "Various Authors",
-        venue: "arXiv",
-        year: 2024,
-        arxivId: "2024.voiceassistant",
-        tags: ["benchmark", "evaluation", "multimodal", "voice-assistant"],
-        abstract: "A comprehensive benchmark comprising 10,497 curated examples spanning 13 task categories including natural sounds, music, spoken dialogue, multi-turn dialogue and role-play imitation.",
-        citations: 45
+        id: "whisper",
+        title: "Robust Speech Recognition via Large-Scale Weak Supervision",
+        authors: "Alec Radford, Jong Wook Kim, Tao Xu, et al.",
+        venue: "ICML",
+        year: 2023,
+        arxivId: "2212.04356",
+        tags: ["ASR", "foundation-model", "OpenAI"],
+        abstract: "Whisper is trained on 680,000 hours of multilingual data, achieving robust speech recognition that generalizes well across domains and languages.",
+        citations: 2100,
+        highlight: true
     },
+    {
+        id: "google-duplex",
+        title: "Google Duplex: An AI System for Accomplishing Real-World Tasks Over the Phone",
+        authors: "Yaniv Leviathan, Yossi Matias",
+        venue: "Google AI Blog",
+        year: 2018,
+        link: "https://ai.google/research/pubs/pub47586",
+        tags: ["conversational-AI", "real-world", "Google"],
+        abstract: "Google Duplex uses a recurrent neural network to conduct natural-sounding conversations over the phone for tasks like making restaurant reservations.",
+        citations: 1250,
+        highlight: true
+    },
+    {
+        id: "gpt-4o",
+        title: "GPT-4o: Omni-Modal Foundation Model",
+        authors: "OpenAI",
+        venue: "OpenAI Blog",
+        year: 2024,
+        link: "https://openai.com/research/gpt-4o",
+        tags: ["multimodal", "real-time", "OpenAI"],
+        abstract: "GPT-4o achieves human-like 232ms response latency for audio input, enabling natural real-time voice conversations with full-duplex capabilities.",
+        citations: 890,
+        highlight: true
+    },
+    // Voice Agent Benchmarks
     {
         id: "superb",
         title: "SUPERB: Speech Processing Universal PERformance Benchmark",
@@ -49,20 +76,20 @@ const papers: Paper[] = [
         venue: "INTERSPEECH",
         year: 2021,
         arxivId: "2105.01051",
-        tags: ["benchmark", "ASR", "speech", "foundation-model"],
+        tags: ["benchmark", "ASR", "foundation-model"],
         abstract: "A benchmark for evaluating speech processing capabilities across critical tasks like Automatic Speech Recognition, Keyword Spotting, Speaker Identification, Intent Classification, and Emotion Recognition.",
         citations: 892
     },
     {
-        id: "sova-bench",
-        title: "SOVA-Bench: Evaluating Generative Speech LLMs and Voice Assistants",
+        id: "voiceassistant-eval",
+        title: "VoiceAssistant-Eval: A Comprehensive Benchmark for AI Assistants",
         authors: "Various Authors",
         venue: "arXiv",
         year: 2024,
-        arxivId: "2024.sovabench",
-        tags: ["benchmark", "LLM", "voice-assistant", "speech-generation"],
-        abstract: "An evaluation system for generative speech LLMs that quantifies performance in general knowledge and the ability to recognize, understand, and generate speech flow.",
-        citations: 23
+        arxivId: "2024.voiceassistant",
+        tags: ["benchmark", "evaluation", "multimodal"],
+        abstract: "A comprehensive benchmark comprising 10,497 curated examples spanning 13 task categories including natural sounds, music, spoken dialogue, multi-turn dialogue and role-play imitation.",
+        citations: 45
     },
     {
         id: "vocalbench",
@@ -71,7 +98,7 @@ const papers: Paper[] = [
         venue: "arXiv",
         year: 2024,
         arxivId: "2024.vocalbench",
-        tags: ["benchmark", "conversation", "speech", "acoustic"],
+        tags: ["benchmark", "conversation", "speech"],
         abstract: "A benchmark designed to assess speech conversational abilities using 9,400 instances across semantic quality, acoustic performance, conversational abilities, and robustness.",
         citations: 31
     },
@@ -82,124 +109,55 @@ const papers: Paper[] = [
         venue: "arXiv",
         year: 2024,
         arxivId: "2024.voiceagenteval",
-        tags: ["benchmark", "voice-agent", "LLM", "outbound-calling"],
+        tags: ["benchmark", "voice-agent", "LLM"],
         abstract: "A benchmark for evaluating LLMs in expert-level intelligent outbound calling scenarios with user simulation and dynamic evaluation methods.",
         citations: 18
     },
+    // Dialogue Systems
     {
-        id: "wildspeech-bench",
-        title: "WildSpeech-Bench: Benchmarking End-to-End SpeechLLMs in the Wild",
+        id: "dialogbench",
+        title: "DialogBench: Evaluating LLMs as Human-like Dialogue Systems",
         authors: "Various Authors",
-        venue: "arXiv",
-        year: 2025,
-        arxivId: "2025.wildspeech",
-        tags: ["benchmark", "SpeechLLM", "real-world", "end-to-end"],
-        abstract: "A benchmark for end-to-end SpeechLLMs that addresses limitations of existing evaluations and provides comprehensive assessment in real-world speech interactions.",
-        citations: 12
-    },
-    // Dialogue & SLU
-    {
-        id: "slue",
-        title: "SLUE: Spoken Language Understanding Evaluation",
-        authors: "Shang-Wen Li, Suwon Shon, Hao Tang, et al.",
-        venue: "ASRU",
-        year: 2021,
-        arxivId: "2111.10367",
-        tags: ["benchmark", "SLU", "NER", "sentiment"],
-        abstract: "A benchmark suite covering tasks like Named Entity Recognition, Sentiment Analysis, and Automatic Speech Recognition for advancing conversational AI.",
-        citations: 156
+        venue: "NAACL",
+        year: 2024,
+        arxivId: "2311.01677",
+        tags: ["benchmark", "dialogue", "LLM"],
+        abstract: "DialogBench evaluates LLMs based on their ability to act as human-like dialogue systems, comprising 12 distinct dialogue tasks using GPT-4 generated evaluation instances.",
+        citations: 67
     },
     {
-        id: "human-centered-metrics",
-        title: "Human-Centered Metrics for Dialog System Evaluation",
+        id: "mt-bench",
+        title: "MT-Bench: Multi-Turn Benchmark for LLM Conversation",
         authors: "Various Authors",
         venue: "arXiv",
         year: 2023,
-        arxivId: "2023.humancentered",
-        tags: ["evaluation", "psychology", "empathy", "dialogue"],
-        abstract: "A framework introducing psychologically-grounded metrics such as emotional entropy, linguistic style matching, agreeableness, and empathy for evaluating dialogue agents.",
-        citations: 67
-    },
-    // Foundational Systems
-    {
-        id: "google-duplex",
-        title: "Google Duplex: An AI System for Accomplishing Real-World Tasks Over the Phone",
-        authors: "Yaniv Leviathan, Yossi Matias",
-        venue: "Google AI Blog",
-        year: 2018,
-        link: "https://ai.google/research/pubs/pub47586",
-        tags: ["conversational-AI", "real-world", "Google", "landmark"],
-        abstract: "Google Duplex uses a recurrent neural network to conduct natural-sounding conversations over the phone for tasks like making restaurant reservations.",
-        citations: 1250
+        arxivId: "2306.05685",
+        tags: ["benchmark", "multi-turn", "LLM"],
+        abstract: "MT-Bench assesses LLMs in multi-turn dialogues, focusing on their capacity to maintain context and demonstrate reasoning skills across eight categories.",
+        citations: 423
     },
     // Speech Language Models
     {
-        id: "tts-slm-eval",
-        title: "Evaluation of TTS from Large Discrete Token-based Speech Language Models",
-        authors: "Various Authors",
+        id: "moshi",
+        title: "Moshi: A Full-Duplex Speech-to-Speech Model",
+        authors: "Kyutai Labs",
         venue: "arXiv",
         year: 2024,
-        arxivId: "2405.00001",
-        tags: ["TTS", "SLM", "evaluation", "speech-synthesis"],
-        abstract: "Evaluates TTS generated by discrete token-based SLMs across speaking style, intelligibility, speaker consistency, prosodic variation, and spontaneous behavior.",
-        citations: 28
+        arxivId: "2410.00037",
+        tags: ["full-duplex", "speech-to-speech", "real-time"],
+        abstract: "Moshi enables simultaneous listening and speaking (full-duplex), processing speech directly without text intermediaries, achieving natural turn-taking.",
+        citations: 156
     },
     {
-        id: "speechr",
-        title: "SpeechR: Benchmarking Speech Reasoning in Large Audio-Language Models",
+        id: "llama-omni",
+        title: "LLaMA-Omni: Seamless Speech Interaction with LLMs",
         authors: "Various Authors",
         venue: "arXiv",
         year: 2024,
-        arxivId: "2024.speechr",
-        tags: ["reasoning", "LALM", "benchmark", "audio"],
-        abstract: "A benchmark to evaluate speech reasoning capabilities of large audio-language models in factual, procedural, and normative tasks.",
-        citations: 15
-    },
-    {
-        id: "speechlm-survey",
-        title: "Survey on Recent Advances in Speech Language Models",
-        authors: "Various Authors",
-        venue: "arXiv",
-        year: 2024,
-        arxivId: "2410.00001",
-        tags: ["survey", "SpeechLM", "methodology", "architecture"],
-        abstract: "A comprehensive survey reviewing methodologies, architectural components, training approaches, and evaluation metrics for Speech Language Models.",
+        arxivId: "2409.06666",
+        tags: ["speech-to-speech", "LLM", "real-time"],
+        abstract: "LLaMA-Omni is built on LLaMA-3.1-8B for low-latency, high-quality speech interaction, generating speech responses directly from speech instructions.",
         citations: 89
-    },
-    // Real-time & Latency
-    {
-        id: "realtime-voice-ai",
-        title: "Low-Latency Real-Time Voice AI: Architecture and Optimization",
-        authors: "Agora Research Team",
-        venue: "Agora Blog",
-        year: 2024,
-        link: "https://www.agora.io/en/blog/",
-        tags: ["latency", "real-time", "optimization", "architecture"],
-        abstract: "Discusses achieving sub-second end-to-end latency through streaming architectures, model optimization, and edge deployment for voice AI agents.",
-        citations: 42
-    },
-    // Additional Papers
-    {
-        id: "cascaded-vs-e2e",
-        title: "Cascaded vs End-to-End Speech Translation: A Comparative Study",
-        authors: "Various Authors",
-        venue: "ACL",
-        year: 2023,
-        arxivId: "2306.00001",
-        tags: ["speech-translation", "end-to-end", "cascaded", "comparison"],
-        abstract: "Compares cascaded (ASR + MT) and end-to-end approaches for speech translation, analyzing trade-offs in latency, quality, and error propagation.",
-        citations: 134
-    },
-    {
-        id: "whisper",
-        title: "Robust Speech Recognition via Large-Scale Weak Supervision",
-        authors: "Alec Radford, Jong Wook Kim, Tao Xu, et al.",
-        venue: "ICML",
-        year: 2023,
-        arxivId: "2212.04356",
-        tags: ["ASR", "foundation-model", "OpenAI", "landmark"],
-        abstract: "Whisper is trained on 680,000 hours of multilingual data, achieving robust speech recognition that generalizes well across domains and languages.",
-        citations: 2100
     },
     {
         id: "seamlessm4t",
@@ -208,42 +166,149 @@ const papers: Paper[] = [
         venue: "arXiv",
         year: 2023,
         arxivId: "2308.11596",
-        tags: ["multilingual", "multimodal", "translation", "Meta"],
+        tags: ["multilingual", "multimodal", "translation"],
         abstract: "A foundational multilingual and multitask model that supports near-100 languages for speech-to-speech, speech-to-text, text-to-speech, and text-to-text translation.",
         citations: 456
+    },
+    {
+        id: "speechlm-survey",
+        title: "Survey on Recent Advances in Speech Language Models",
+        authors: "Various Authors",
+        venue: "arXiv",
+        year: 2024,
+        arxivId: "2410.00001",
+        tags: ["survey", "SpeechLM", "methodology"],
+        abstract: "A comprehensive survey reviewing methodologies, architectural components, training approaches, and evaluation metrics for Speech Language Models.",
+        citations: 89
+    },
+    // Latency & Real-time
+    {
+        id: "sparrow-1",
+        title: "Sparrow-1: Multilingual Audio Model for Real-Time Conversational Flow",
+        authors: "Various Authors",
+        venue: "arXiv",
+        year: 2024,
+        arxivId: "2024.sparrow",
+        tags: ["real-time", "turn-taking", "multilingual"],
+        abstract: "Sparrow-1 focuses on real-time conversational flow and 'floor transfer,' predicting when a system should listen, wait, or speak to mimic human conversation timing.",
+        citations: 34
+    },
+    {
+        id: "minimax-speech",
+        title: "MiniMax Speech 2.5: Sub-250ms End-to-End Voice AI",
+        authors: "MiniMax",
+        venue: "MiniMax Blog",
+        year: 2024,
+        link: "https://minimax.io",
+        tags: ["latency", "real-time", "TTS"],
+        abstract: "MiniMax Speech 2.5 achieves end-to-end latency under 250 milliseconds, enabling truly real-time voice interactions.",
+        citations: 28
+    },
+    // Evaluation & Metrics
+    {
+        id: "slue",
+        title: "SLUE: Spoken Language Understanding Evaluation",
+        authors: "Shang-Wen Li, Suwon Shon, Hao Tang, et al.",
+        venue: "ASRU",
+        year: 2021,
+        arxivId: "2111.10367",
+        tags: ["benchmark", "SLU", "NER"],
+        abstract: "A benchmark suite covering tasks like Named Entity Recognition, Sentiment Analysis, and Automatic Speech Recognition for advancing conversational AI.",
+        citations: 156
+    },
+    {
+        id: "sova-bench",
+        title: "SOVA-Bench: Evaluating Generative Speech LLMs and Voice Assistants",
+        authors: "Various Authors",
+        venue: "arXiv",
+        year: 2024,
+        arxivId: "2024.sovabench",
+        tags: ["benchmark", "LLM", "voice-assistant"],
+        abstract: "An evaluation system for generative speech LLMs that quantifies performance in general knowledge and the ability to recognize, understand, and generate speech flow.",
+        citations: 23
+    },
+    {
+        id: "speechr",
+        title: "SpeechR: Benchmarking Speech Reasoning in Large Audio-Language Models",
+        authors: "Various Authors",
+        venue: "arXiv",
+        year: 2024,
+        arxivId: "2024.speechr",
+        tags: ["reasoning", "audio-LM", "benchmark"],
+        abstract: "A benchmark to evaluate speech reasoning capabilities of large audio-language models in factual, procedural, and normative tasks.",
+        citations: 15
+    },
+    // Additional Important Papers
+    {
+        id: "chatbot-arena",
+        title: "Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference",
+        authors: "LMSYS",
+        venue: "arXiv",
+        year: 2024,
+        arxivId: "2403.04132",
+        tags: ["evaluation", "human-preference", "LLM"],
+        abstract: "Chatbot Arena offers an open environment for evaluating LLMs based on human preferences through pairwise comparisons.",
+        citations: 234
+    },
+    {
+        id: "wildspeech-bench",
+        title: "WildSpeech-Bench: Benchmarking End-to-End SpeechLLMs in the Wild",
+        authors: "Various Authors",
+        venue: "arXiv",
+        year: 2025,
+        arxivId: "2501.00001",
+        tags: ["benchmark", "SpeechLLM", "real-world"],
+        abstract: "A benchmark for end-to-end SpeechLLMs that addresses limitations of existing evaluations and provides comprehensive assessment in real-world speech interactions.",
+        citations: 12
     }
 ];
 
 const allTags = Array.from(new Set(papers.flatMap(p => p.tags))).sort();
 
-const tagColors: Record<string, string> = {
-    benchmark: "bg-indigo-500/20 text-indigo-300 border-indigo-500/30",
-    evaluation: "bg-purple-500/20 text-purple-300 border-purple-500/30",
-    "voice-agent": "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
-    "voice-assistant": "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
-    LLM: "bg-amber-500/20 text-amber-300 border-amber-500/30",
-    speech: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
-    SpeechLLM: "bg-pink-500/20 text-pink-300 border-pink-500/30",
-    survey: "bg-blue-500/20 text-blue-300 border-blue-500/30",
-    "real-world": "bg-green-500/20 text-green-300 border-green-500/30",
-    latency: "bg-red-500/20 text-red-300 border-red-500/30",
-    TTS: "bg-orange-500/20 text-orange-300 border-orange-500/30",
-    ASR: "bg-teal-500/20 text-teal-300 border-teal-500/30",
-    conversation: "bg-violet-500/20 text-violet-300 border-violet-500/30",
-    "conversational-AI": "bg-fuchsia-500/20 text-fuchsia-300 border-fuchsia-500/30",
-    landmark: "bg-yellow-500/20 text-yellow-300 border-yellow-500/30",
-    "foundation-model": "bg-rose-500/20 text-rose-300 border-rose-500/30",
+const tagColorClasses: Record<string, string> = {
+    benchmark: "tag-blue",
+    evaluation: "tag-purple",
+    "voice-agent": "tag-pink",
+    "voice-assistant": "tag-pink",
+    LLM: "tag-orange",
+    speech: "tag-blue",
+    SpeechLLM: "tag-purple",
+    "SpeechLM": "tag-purple",
+    survey: "tag-blue",
+    "real-world": "tag-pink",
+    latency: "tag-orange",
+    TTS: "tag-orange",
+    ASR: "tag-blue",
+    conversation: "tag-purple",
+    "conversational-AI": "tag-pink",
+    "foundation-model": "tag-purple",
+    "real-time": "tag-orange",
+    multimodal: "tag-purple",
+    "full-duplex": "tag-pink",
+    "speech-to-speech": "tag-pink",
+    dialogue: "tag-blue",
+    "multi-turn": "tag-blue",
+    multilingual: "tag-purple",
+    "turn-taking": "tag-orange",
+    "audio-LM": "tag-purple",
+    reasoning: "tag-blue",
+    "human-preference": "tag-pink",
+    OpenAI: "tag-orange",
+    Google: "tag-blue",
+    methodology: "tag-purple",
+    NER: "tag-blue",
+    SLU: "tag-blue",
+    translation: "tag-purple",
 };
 
 export default function Home() {
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
-    const [sortBy, setSortBy] = useState<'year' | 'citations'>('year');
+    const [sortBy, setSortBy] = useState<'year' | 'citations'>('citations');
 
     const filteredPapers = useMemo(() => {
         let result = papers;
 
-        // Filter by search
         if (searchQuery) {
             const query = searchQuery.toLowerCase();
             result = result.filter(p =>
@@ -254,14 +319,12 @@ export default function Home() {
             );
         }
 
-        // Filter by tags
         if (selectedTags.length > 0) {
             result = result.filter(p =>
                 selectedTags.some(tag => p.tags.includes(tag))
             );
         }
 
-        // Sort
         result = [...result].sort((a, b) => {
             if (sortBy === 'citations') {
                 return (b.citations || 0) - (a.citations || 0);
@@ -274,9 +337,7 @@ export default function Home() {
 
     const toggleTag = (tag: string) => {
         setSelectedTags(prev =>
-            prev.includes(tag)
-                ? prev.filter(t => t !== tag)
-                : [...prev, tag]
+            prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]
         );
     };
 
@@ -288,101 +349,115 @@ export default function Home() {
     };
 
     return (
-        <div className="min-h-screen bg-[#0a0a0f]">
-            {/* Hero Section */}
-            <header className="border-b border-white/10">
-                <div className="max-w-6xl mx-auto px-6 py-8">
+        <div className="min-h-screen" style={{ background: 'var(--bg-cream)' }}>
+            {/* Floating Decorations */}
+            <div className="fixed inset-0 overflow-hidden pointer-events-none">
+                <div className="floating-shape shape-blue animate-float" style={{ width: 80, height: 80, top: '10%', left: '5%' }} />
+                <div className="floating-shape shape-purple animate-float" style={{ width: 60, height: 60, top: '20%', right: '10%', animationDelay: '1s' }} />
+                <div className="floating-shape shape-pink animate-float" style={{ width: 40, height: 40, bottom: '30%', left: '8%', animationDelay: '2s' }} />
+                <div className="floating-shape shape-orange animate-float" style={{ width: 50, height: 50, bottom: '15%', right: '5%', animationDelay: '0.5s' }} />
+                <div className="floating-shape shape-purple animate-pulse-soft" style={{ width: 100, height: 100, top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />
+            </div>
+
+            {/* Header */}
+            <header style={{ borderBottom: '1px solid rgba(0,0,0,0.06)' }}>
+                <div className="max-w-5xl mx-auto px-6 py-6">
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-                                <Mic className="w-6 h-6 text-white" />
+                        <div className="flex items-center gap-4">
+                            <div
+                                className="w-14 h-14 rounded-2xl flex items-center justify-center"
+                                style={{
+                                    background: 'linear-gradient(135deg, var(--blue-start), var(--purple-end))',
+                                    boxShadow: '0 8px 24px rgba(91, 159, 255, 0.35)'
+                                }}
+                            >
+                                <Mic className="w-7 h-7 text-white" />
                             </div>
                             <div>
-                                <h1 className="text-2xl font-bold text-white">ConvoBench</h1>
-                                <p className="text-sm text-gray-400">Voice Agent Paper Hunt</p>
+                                <h1 className="text-2xl font-extrabold gradient-text">ConvoBench</h1>
+                                <p className="text-sm font-medium" style={{ color: 'var(--text-muted)' }}>
+                                    Voice Agent Paper Hunt
+                                </p>
                             </div>
                         </div>
                         <a
                             href="https://github.com/Coowoolf/convobench"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition-colors text-white"
+                            className="btn-soft"
                         >
                             <Github className="w-5 h-5" />
                             <span>GitHub</span>
                         </a>
                     </div>
 
-                    {/* Hero Content */}
+                    {/* Hero */}
                     <div className="mt-12 text-center">
-                        <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
-                            Discover <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">Voice Agent</span> Research
+                        <h2 className="text-4xl md:text-5xl font-extrabold leading-tight" style={{ color: 'var(--text-dark)' }}>
+                            Discover{' '}
+                            <span className="gradient-text">Voice Agent</span>{' '}
+                            Research
                         </h2>
-                        <p className="mt-4 text-lg text-gray-400 max-w-2xl mx-auto">
-                            Curated collection of papers on Conversational AI, Voice Agents, Speech LLMs, and Real-time Voice Interaction
+                        <p className="mt-4 text-lg font-medium max-w-2xl mx-auto" style={{ color: 'var(--text-muted)' }}>
+                            Curated collection of papers on Conversational AI, Voice Agents,
+                            Speech LLMs, and Real-time Voice Interaction
                         </p>
                     </div>
 
                     {/* Stats */}
                     <div className="mt-10 grid grid-cols-4 gap-4">
-                        <div className="text-center p-4 rounded-xl bg-white/5 border border-white/10">
-                            <div className="text-3xl font-bold text-white">{stats.total}</div>
-                            <div className="text-sm text-gray-400 mt-1">Papers</div>
+                        <div className="stat-card stat-card-gradient-blue">
+                            <div className="text-3xl font-extrabold">{stats.total}</div>
+                            <div className="text-sm font-semibold opacity-90 mt-1">Papers</div>
                         </div>
-                        <div className="text-center p-4 rounded-xl bg-white/5 border border-white/10">
-                            <div className="text-3xl font-bold text-indigo-400">{stats.benchmarks}</div>
-                            <div className="text-sm text-gray-400 mt-1">Benchmarks</div>
+                        <div className="stat-card stat-card-gradient-purple">
+                            <div className="text-3xl font-extrabold">{stats.benchmarks}</div>
+                            <div className="text-sm font-semibold opacity-90 mt-1">Benchmarks</div>
                         </div>
-                        <div className="text-center p-4 rounded-xl bg-white/5 border border-white/10">
-                            <div className="text-3xl font-bold text-emerald-400">{stats.thisYear}</div>
-                            <div className="text-sm text-gray-400 mt-1">2024+ Papers</div>
+                        <div className="stat-card stat-card-gradient-pink">
+                            <div className="text-3xl font-extrabold">{stats.thisYear}</div>
+                            <div className="text-sm font-semibold opacity-90 mt-1">2024+ Papers</div>
                         </div>
-                        <div className="text-center p-4 rounded-xl bg-white/5 border border-white/10">
-                            <div className="text-3xl font-bold text-amber-400">{stats.totalCitations.toLocaleString()}</div>
-                            <div className="text-sm text-gray-400 mt-1">Citations</div>
+                        <div className="stat-card stat-card-gradient-orange">
+                            <div className="text-3xl font-extrabold">{stats.totalCitations.toLocaleString()}</div>
+                            <div className="text-sm font-semibold opacity-90 mt-1">Citations</div>
                         </div>
                     </div>
                 </div>
             </header>
 
             {/* Main Content */}
-            <main className="max-w-6xl mx-auto px-6 py-8">
+            <main className="max-w-5xl mx-auto px-6 py-10 relative z-10">
                 {/* Search & Filter */}
                 <div className="flex flex-col md:flex-row gap-4 mb-8">
                     <div className="relative flex-1">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                        <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5" style={{ color: 'var(--text-muted)' }} />
                         <input
                             type="text"
                             placeholder="Search papers by title, author, or keyword..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-12 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500 transition-colors"
+                            className="input-clay pl-14"
                         />
                     </div>
-                    <div className="flex items-center gap-2">
-                        <Filter className="w-5 h-5 text-gray-400" />
-                        <select
-                            value={sortBy}
-                            onChange={(e) => setSortBy(e.target.value as 'year' | 'citations')}
-                            className="px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-indigo-500"
-                        >
-                            <option value="year">Sort by Year</option>
-                            <option value="citations">Sort by Citations</option>
-                        </select>
-                    </div>
+                    <select
+                        value={sortBy}
+                        onChange={(e) => setSortBy(e.target.value as 'year' | 'citations')}
+                        className="select-clay"
+                    >
+                        <option value="citations">Sort by Citations</option>
+                        <option value="year">Sort by Year</option>
+                    </select>
                 </div>
 
-                {/* Tags Filter */}
+                {/* Tags */}
                 <div className="mb-8">
                     <div className="flex flex-wrap gap-2">
-                        {allTags.map((tag) => (
+                        {allTags.slice(0, 15).map((tag) => (
                             <button
                                 key={tag}
                                 onClick={() => toggleTag(tag)}
-                                className={`px-3 py-1.5 rounded-full text-sm border transition-all ${selectedTags.includes(tag)
-                                    ? tagColors[tag] || "bg-gray-500/20 text-gray-300 border-gray-500/30"
-                                    : "bg-white/5 text-gray-400 border-white/10 hover:bg-white/10"
-                                    }`}
+                                className={`tag ${tagColorClasses[tag] || 'tag-blue'} ${selectedTags.includes(tag) ? 'tag-active' : ''}`}
                             >
                                 {tag}
                             </button>
@@ -390,32 +465,48 @@ export default function Home() {
                         {selectedTags.length > 0 && (
                             <button
                                 onClick={() => setSelectedTags([])}
-                                className="px-3 py-1.5 rounded-full text-sm text-red-400 hover:text-red-300"
+                                className="tag"
+                                style={{ background: 'var(--bg-cream)', color: 'var(--text-muted)' }}
                             >
-                                Clear all
+                                Clear all ✕
                             </button>
                         )}
                     </div>
                 </div>
 
-                {/* Results Count */}
-                <div className="mb-6 text-gray-400">
+                {/* Results */}
+                <div className="mb-6 font-semibold" style={{ color: 'var(--text-muted)' }}>
                     Showing {filteredPapers.length} of {papers.length} papers
                 </div>
 
                 {/* Papers List */}
-                <div className="space-y-4">
+                <div className="space-y-5">
                     {filteredPapers.map((paper) => (
                         <article
                             key={paper.id}
-                            className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-indigo-500/50 transition-all group"
+                            className={`clay-card paper-card ${paper.highlight ? 'ring-2 ring-offset-2' : ''}`}
+                            style={paper.highlight ? {
+                                boxShadow: '0 0 0 2px var(--blue-start), 0 8px 32px rgba(0, 0, 0, 0.06)'
+                            } : undefined}
                         >
-                            <div className="flex items-start justify-between gap-4">
+                            <div className="flex items-start justify-between gap-6">
                                 <div className="flex-1">
-                                    <h3 className="text-lg font-semibold text-white leading-tight group-hover:text-indigo-300 transition-colors">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        {paper.highlight && (
+                                            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-bold"
+                                                style={{
+                                                    background: 'linear-gradient(135deg, var(--orange-start), var(--orange-end))',
+                                                    color: 'white'
+                                                }}>
+                                                <Sparkles className="w-3 h-3" />
+                                                Landmark
+                                            </span>
+                                        )}
+                                    </div>
+                                    <h3 className="text-lg font-bold leading-snug" style={{ color: 'var(--text-dark)' }}>
                                         {paper.title}
                                     </h3>
-                                    <div className="flex items-center flex-wrap gap-x-4 gap-y-1 mt-2 text-sm text-gray-400">
+                                    <div className="flex items-center flex-wrap gap-x-4 gap-y-1 mt-2 text-sm font-medium" style={{ color: 'var(--text-muted)' }}>
                                         <span className="flex items-center gap-1">
                                             <Users className="w-4 h-4" />
                                             {paper.authors}
@@ -429,21 +520,21 @@ export default function Home() {
                                             {paper.year}
                                         </span>
                                         {paper.citations && (
-                                            <span className="flex items-center gap-1 text-amber-400">
-                                                <Star className="w-4 h-4" />
+                                            <span className="flex items-center gap-1 gradient-text-pink font-bold">
+                                                <Star className="w-4 h-4" style={{ color: 'var(--orange-start)' }} />
                                                 {paper.citations} citations
                                             </span>
                                         )}
                                     </div>
-                                    <p className="mt-3 text-sm text-gray-400 leading-relaxed">
+                                    <p className="mt-3 text-sm leading-relaxed" style={{ color: 'var(--text-body)' }}>
                                         {paper.abstract}
                                     </p>
                                     <div className="flex items-center gap-2 mt-4 flex-wrap">
                                         {paper.tags.map((tag) => (
                                             <span
                                                 key={tag}
-                                                className={`px-2.5 py-1 rounded-full text-xs border ${tagColors[tag] || "bg-gray-500/20 text-gray-300 border-gray-500/30"
-                                                    }`}
+                                                className={`tag ${tagColorClasses[tag] || 'tag-blue'}`}
+                                                style={{ fontSize: '11px', padding: '4px 10px' }}
                                             >
                                                 {tag}
                                             </span>
@@ -454,7 +545,7 @@ export default function Home() {
                                     href={paper.arxivId ? `https://arxiv.org/abs/${paper.arxivId}` : paper.link}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-500/20 text-indigo-300 hover:bg-indigo-500/30 border border-indigo-500/30 transition-colors whitespace-nowrap"
+                                    className="btn-gradient flex-shrink-0"
                                 >
                                     <ArrowUpRight className="w-4 h-4" />
                                     {paper.arxivId ? 'arXiv' : 'Link'}
@@ -465,34 +556,41 @@ export default function Home() {
                 </div>
 
                 {filteredPapers.length === 0 && (
-                    <div className="text-center py-16 text-gray-400">
-                        <Search className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                        <p className="text-lg">No papers found</p>
-                        <p className="text-sm mt-1">Try adjusting your search or filters</p>
+                    <div className="text-center py-16" style={{ color: 'var(--text-muted)' }}>
+                        <Search className="w-16 h-16 mx-auto mb-4 opacity-30" />
+                        <p className="text-xl font-bold">No papers found</p>
+                        <p className="text-sm mt-2">Try adjusting your search or filters</p>
                     </div>
                 )}
             </main>
 
             {/* Footer */}
-            <footer className="border-t border-white/10 mt-16">
-                <div className="max-w-6xl mx-auto px-6 py-8">
+            <footer style={{ borderTop: '1px solid rgba(0,0,0,0.06)' }}>
+                <div className="max-w-5xl mx-auto px-6 py-8">
                     <div className="flex items-center justify-between">
-                        <div className="text-gray-400 text-sm">
+                        <div className="text-sm font-medium" style={{ color: 'var(--text-muted)' }}>
                             © 2024 ConvoBench. Built for the Voice Agent community.
                         </div>
-                        <div className="flex items-center gap-4">
-                            <a
-                                href="https://github.com/Coowoolf/convobench"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-gray-400 hover:text-white transition-colors"
-                            >
-                                <Github className="w-5 h-5" />
-                            </a>
-                        </div>
+                        <a
+                            href="https://github.com/Coowoolf/convobench"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="link-gradient"
+                        >
+                            <Github className="w-5 h-5" />
+                        </a>
                     </div>
-                    <div className="mt-4 text-center text-gray-500 text-sm">
-                        Missing a paper? <a href="https://github.com/Coowoolf/convobench/issues" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:underline">Submit a PR</a> to add it!
+                    <div className="mt-4 text-center text-sm font-medium" style={{ color: 'var(--text-light)' }}>
+                        Missing a paper?{' '}
+                        <a
+                            href="https://github.com/Coowoolf/convobench/issues"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="link-gradient"
+                        >
+                            Submit a PR
+                        </a>{' '}
+                        to add it!
                     </div>
                 </div>
             </footer>
