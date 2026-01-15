@@ -8,7 +8,8 @@ import {
     FileText,
     BarChart3,
     Settings,
-    Mic
+    Mic,
+    GraduationCap
 } from 'lucide-react';
 import { useApp } from './context';
 
@@ -19,6 +20,7 @@ const menuItems = [
     { id: 'runner', icon: Play, label: '运行评测' },
     { id: 'transcripts', icon: FileText, label: '轨迹查看' },
     { id: 'analytics', icon: BarChart3, label: '分析报告' },
+    { id: 'research', icon: GraduationCap, label: '研究论文' },
 ];
 
 export function Sidebar() {

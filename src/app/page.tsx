@@ -8,6 +8,7 @@ import { EvalSuites } from './EvalSuites';
 import { EvalRunner } from './EvalRunner';
 import { TranscriptViewer } from './TranscriptViewer';
 import { Analytics } from './Analytics';
+import { Research } from './Research';
 
 function MainContent() {
     const { currentPage } = useApp();
@@ -26,6 +27,8 @@ function MainContent() {
                 return <TranscriptViewer />;
             case 'analytics':
                 return <Analytics />;
+            case 'research':
+                return <Research />;
             default:
                 return <Dashboard />;
         }
