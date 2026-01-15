@@ -7,17 +7,26 @@
   --gradient-pink: linear-gradient(135deg, #F472B6, #FCA5A5);
   --gradient-orange: linear-gradient(135deg, #FB923C, #FBBF24);
   --gradient-main: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+  --gradient-emerald: linear-gradient(135deg, #10b981, #059669);
+  --gradient-cyan: linear-gradient(135deg, #06b6d4, #0891b2);
+  --gradient-amber: linear-gradient(135deg, #f59e0b, #d97706);
+  --gradient-slate: linear-gradient(135deg, #64748b, #475569);
 
   /* Colors */
   --blue: #5B9FFF;
   --purple: #A78BFA;
   --pink: #F472B6;
   --orange: #FB923C;
+  --cyan: #06b6d4;
+  --emerald: #10b981;
+  --amber: #f59e0b;
+  --slate: #64748b;
 
   /* Light Mode (Dopamine Geek Style - Default) */
   --bg-main: #FAF8F5;
   --bg-card: #FFFFFF;
   --bg-elevated: #FFFFFF;
+  --bg-primary: #FAF8F5;
   --text-primary: #1A1A1A;
   --text-secondary: #4B5563;
   --text-tertiary: #9CA3AF;
