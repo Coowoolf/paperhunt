@@ -1,0 +1,8 @@
+{
+    "crons": [
+        {
+            "path": "/api/cron/paper-scan",
+            "schedule": "0 8 * * *"
+        }
+    ]
+}

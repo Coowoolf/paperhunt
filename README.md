@@ -4,7 +4,7 @@
   <img src="public/logo.jpg" alt="PaperHunt Logo" width="200" />
 </p>
 
-**Conversational AI Research Hub** - Curated collection of 75+ years of research from Turing Test (1950) to Full-Duplex Real-time Interaction (2026).
+**Conversational AI Insight Discovery Tool** - Curated collection of 60+ papers spanning 75+ years of research from Turing Test (1950) to Full-Duplex Real-time Interaction (2026).
 
 🔗 **Live Site:** [paperhunt.org](https://paperhunt.org)
 
@@ -14,10 +14,26 @@
 
 | Metric | Value | Description |
 |--------|-------|-------------|
+| **Papers** | 60+ | Curated research collection |
 | **Human Turn Gap** | ~200ms | Natural conversation pause |
 | **GPT-4o Latency** | ~320ms | Approaching human-level |
-| **WER Human Parity** | 5.1% | Achieved by Microsoft 2017 |
 | **Target Architecture** | Full-Duplex | Listening while Speaking |
+
+---
+
+## 🗺️ Interactive Pipeline Map (NEW in v2.0)
+
+Visual tier-based taxonomy for understanding Voice Agent architecture:
+
+| Tier | Category | Description |
+|------|----------|-------------|
+| **0** | Hall of Fame | Foundation classics (Turing, ELIZA, Transformer) |
+| **1** | Theory | Foundational concepts |
+| **2** | Ear (ASR) | Audio input processing |
+| **3** | Brain (LLM) | Core intelligence layer |
+| **4** | Voice (TTS) | Audio output synthesis |
+| **5** | Support | Infrastructure & Tools (incl. VoiceAgentEval) |
+| **6** | Global | System-level design |
 
 ---
 
@@ -34,41 +50,23 @@ Why typical voice bots feel robotic:
 
 ---
 
-## 📚 Featured Research
-
-### Landmark Papers
-- **Turing Test** (1950) - Foundation of AI
-- **ELIZA** (1966) - First chatbot  
-- **Turn-Taking Systematics** (1974) - Conversation rules
-- **Transformer** (2017) - Attention mechanism
-- **InstructGPT** (2022) - RLHF alignment
-- **GPT-4o** (2024) - Native multimodal real-time
-- **Moshi** (2024) - Full-duplex open-source
-
-### Historical Timeline
-- **Genesis Era (1950-1980)** - Symbolic AI & Rules
-- **Statistical Era (1980-2010)** - HMM & Probabilistic
-- **Deep Learning Era (2010-2020)** - End-to-End
-- **Generative Era (2020+)** - LLMs & Duplex
-
----
-
 ## ✨ Features
 
+- 🗺️ **Interactive Pipeline Map** - Visual tier-based paper taxonomy
 - 📊 **Core Metrics Dashboard** - WER, latency, research trends
 - 🎯 **Experience Gaps Analysis** - Why bots feel robotic
 - 🏗️ **Architecture Comparison** - Cascade vs Omni-Duplex
 - 📅 **Historical Timeline** - 1950-2026 milestones
-- 📚 **Paper Repository** - 25+ curated papers with era filtering
+- 📚 **Paper Repository** - 60+ curated papers with era filtering
 - 🌗 **Dual Theme** - Light & Dark modes
-- 🔍 **Smart Search** - Filter by era, tags, keywords
+- 🔍 **Smart Search** - Filter by era, tier, tags, keywords
 
 ---
 
 ## 🛠️ Tech Stack
 
 - **Framework**: Next.js 16 (App Router)
-- **Styling**: Custom CSS with CSS Variables
+- **Styling**: Custom CSS with CSS Variables (Dopamine Geek Style)
 - **Icons**: Lucide React
 - **Deployment**: Vercel
 - **Domain**: paperhunt.org
@@ -88,7 +86,7 @@ npm run dev
 
 ## 🤝 Contributing
 
-Add papers to the `papers` array in `src/app/page.tsx`:
+Add papers to `src/data/papers.ts`:
 
 ```typescript
 {
@@ -101,8 +99,10 @@ Add papers to the `papers` array in `src/app/page.tsx`:
   tags: ["benchmark", "LLM"],
   abstract: "Description...",
   citations: 100,
-  highlight: true,  // for landmark papers
-  era: "Generative" // Genesis|Statistical|Deep Learning|Generative
+  era: "Generative",  // Genesis|Statistical|Deep Learning|Generative
+  tier: "3",          // 0-6 based on Pipeline Map
+  mustRead: true,     // optional: highlight as must-read
+  oneLiner: "Brief insight summary"
 }
 ```
 
