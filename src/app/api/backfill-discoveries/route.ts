@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
+import { kv } from '@vercel/kv';
 
 // Reuse keywords from paper-scan
 const SEARCH_KEYWORDS = [
@@ -104,34 +103,12 @@ export async function GET(request: NextRequest) {
 
         console.log(`Found ${uniquePapers.length} unique papers`);
 
-        // Load existing main papers to exclude
-        const mainPapersPath = path.join(process.cwd(), 'src', 'data', 'papers.ts');
-        const mainPapersContent = await fs.readFile(mainPapersPath, 'utf-8');
-        const mainArxivIds = new Set(
-            Array.from(mainPapersContent.matchAll(/arxivId:\s*["']([^"']+)["']/g))
-                .map(m => m[1])
-        );
+        // Load existing discoveries from KV
+        const existingDiscoveries: Discovery[] = await kv.get('discoveries') || [];
+        const existingDiscoveryIds = new Set(existingDiscoveries.map(d => d.arxivId));
 
-        // Load existing discoveries
-        const discoveriesPath = path.join(process.cwd(), 'data', 'discoveries.json');
-        let existingData: { discoveries: Discovery[], lastScan: string | null } = {
-            discoveries: [],
-            lastScan: null
-        };
-
-        try {
-            const data = await fs.readFile(discoveriesPath, 'utf-8');
-            existingData = JSON.parse(data);
-        } catch {
-            // File doesn't exist or is invalid, start fresh
-        }
-
-        const existingDiscoveryIds = new Set(existingData.discoveries.map(d => d.arxivId));
-
-        // Filter out papers already in main collection or discoveries
-        const newPapers = uniquePapers.filter(p =>
-            !mainArxivIds.has(p.arxivId) && !existingDiscoveryIds.has(p.arxivId)
-        );
+        // Filter out papers already discovered
+        const newPapers = uniquePapers.filter(p => !existingDiscoveryIds.has(p.arxivId));
 
         console.log(`New discoveries: ${newPapers.length}`);
 
@@ -146,13 +123,10 @@ export async function GET(request: NextRequest) {
             reviewed: false
         }));
 
-        // Merge and save
-        const updatedData = {
-            discoveries: [...newDiscoveries, ...existingData.discoveries],
-            lastScan: new Date().toISOString()
-        };
-
-        await fs.writeFile(discoveriesPath, JSON.stringify(updatedData, null, 2));
+        // Merge and save to KV
+        const allDiscoveries = [...newDiscoveries, ...existingDiscoveries];
+        await kv.set('discoveries', allDiscoveries);
+        await kv.set('discoveries:lastScan', new Date().toISOString());
 
         return NextResponse.json({
             success: true,
@@ -160,8 +134,8 @@ export async function GET(request: NextRequest) {
             dateRange: { startDate, endDate },
             keywordsSearched: SEARCH_KEYWORDS.length,
             totalFound: uniquePapers.length,
-            excludedFromMain: uniquePapers.length - newPapers.length,
             newDiscoveries: newPapers.length,
+            totalStored: allDiscoveries.length,
             sampleTitles: newDiscoveries.slice(0, 5).map(d => d.title)
         });
 

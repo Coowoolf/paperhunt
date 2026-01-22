@@ -20,7 +20,7 @@ export default function DiscoveryPage() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('/data/discoveries.json')
+        fetch('/api/discoveries')
             .then(res => res.json())
             .then(data => {
                 setDiscoveries(data.discoveries || []);

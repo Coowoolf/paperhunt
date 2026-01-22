@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
+import { kv } from '@vercel/kv';
 
 // Keywords to search for new voice agent papers
 const SEARCH_KEYWORDS = [
@@ -129,16 +128,8 @@ export async function GET(request: NextRequest) {
         // Filter recent papers (last 7 days)
         const recentPapers = filterRecentPapers(uniquePapers, 7);
 
-        // Load existing discoveries
-        const discoveriesPath = path.join(process.cwd(), 'data', 'discoveries.json');
-        let existingDiscoveries: Discovery[] = [];
-
-        try {
-            const data = await fs.readFile(discoveriesPath, 'utf-8');
-            existingDiscoveries = JSON.parse(data);
-        } catch {
-            // File doesn't exist, start fresh
-        }
+        // Load existing discoveries from KV
+        const existingDiscoveries: Discovery[] = await kv.get('discoveries') || [];
 
         // Find new papers not already discovered
         const existingIds = new Set(existingDiscoveries.map(d => d.arxivId));
@@ -155,9 +146,10 @@ export async function GET(request: NextRequest) {
             reviewed: false
         }));
 
-        // Merge and save
+        // Merge and save to KV
         const allDiscoveries = [...newDiscoveries, ...existingDiscoveries];
-        await fs.writeFile(discoveriesPath, JSON.stringify(allDiscoveries, null, 2));
+        await kv.set('discoveries', allDiscoveries);
+        await kv.set('discoveries:lastScan', new Date().toISOString());
 
         // Return summary
         return NextResponse.json({
