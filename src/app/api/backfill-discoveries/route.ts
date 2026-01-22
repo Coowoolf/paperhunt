@@ -92,7 +92,7 @@ export async function GET(request: NextRequest) {
         await redis.connect();
 
         const allPapers: ArxivPaper[] = [];
-        const startDate = '20240101';
+        const startDate = '20220101'; // Extended to 2022 to capture more papers
         const endDate = '20261231';
 
         console.log(`Starting backfill for ${startDate} to ${endDate}...`);
