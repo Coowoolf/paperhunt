@@ -145,6 +145,9 @@ export async function GET(request: NextRequest) {
             sampleTitles: newDiscoveries.slice(0, 5).map(d => d.title)
         });
 
+        // Note: Google Scholar search runs separately via /api/backfill-scholar
+        // to avoid timeout issues. Call it manually or via cron.
+
     } catch (error) {
         await redis.disconnect();
         console.error('Backfill error:', error);
